@@ -1,0 +1,226 @@
+# *** CHAPTER 1 - EXCERCISE 1 ***
+# Change the '*' in display according to its corresponding number.
+# This file shows two different solutions to the same problem.
+
+# 1st solution(long one)..
+
+import sys
+
+
+Zero  = [" *** ", 
+         "*   *", 
+         "*   *", 
+         "*   *",
+         "*   *",
+         "*   *",
+         " *** "]
+
+One   = [" * ",
+         "** ",
+         " * ",
+         " * ",
+         " * ",
+         " * ",
+         "***"]
+
+Two   = [" *** ",
+         "*   *",
+         "*  * ",
+         "  *  ",
+         " *   ",
+         "*    ",
+         "*****"]
+
+Three = [" *** ",
+         "*   *",
+         "    *",
+         "  ** ",
+         "    *",
+         "*   *",
+         " *** "]
+
+Four  = ["    * ",
+         "   ** ",
+         "  * * ",
+         " *  * ",
+         "******",
+         "    * ",
+         "    * "]
+
+Five  = ["*****",
+         "*    ",
+         "*    ",
+         " *** ",
+         "    *",
+         "*   *",
+         " *** "]
+
+Six   = [" *** ",
+         "*   *",
+         "*    ",
+         "**** ",
+         "*   *",
+         "*   *",
+         " *** "]
+
+Seven = ["*****",
+         "    *",
+         "   * ",
+         "  *  ",
+         " *   ",
+         "*    ",
+         "*    "]
+
+Eight = [" *** ",
+         "*   *",
+         "*   *",
+         " *** ",
+         "*   *",
+         "*   *",
+         " *** "]
+
+Nine  = [" ****",
+         "*   *",
+         "*   *",
+         " ****",
+         "    *",
+         "    *",
+         " *** "]
+ 
+Digits = [Zero, One, Two, Three, Four, Five, Six, Seven, Eight, Nine]
+
+for Number in Digits:                                     # Getting down to a sigle element which can either be ' ' or '*' and
+    for item in Number:                                   # changing it to the Number in Digits
+        for _ in item:
+            if _ != " ":
+                item = " " + Number
+
+try:
+    digits = sys.argv[1]
+    row = 0
+    while row < 7:
+        line = ""
+        column = 0
+        while column < len(digits):
+            number = int(digits[column])
+            digit = Digits[number]
+            line += digit[row] + " "
+            column += 1
+        print(line)
+        row += 1
+except IndexError:
+    print("enter numbers...(bigdigits.py <number>)")
+except ValueError:
+    print("only numbers allowed..(no strings f.e.)")
+
+# ...........................................................................................
+# 2nd solution(short smart one)
+
+import sys
+
+
+Zero  = [" *** ", 
+         "*   *", 
+         "*   *", 
+         "*   *",
+         "*   *",
+         "*   *",
+         " *** "]
+
+One   = [" * ",
+         "** ",
+         " * ",
+         " * ",
+         " * ",
+         " * ",
+         "***"]
+
+Two   = [" *** ",
+         "*   *",
+         "*  * ",
+         "  *  ",
+         " *   ",
+         "*    ",
+         "*****"]
+
+Three = [" *** ",
+         "*   *",
+         "    *",
+         "  ** ",
+         "    *",
+         "*   *",
+         " *** "]
+
+Four  = ["    * ",
+         "   ** ",
+         "  * * ",
+         " *  * ",
+         "******",
+         "    * ",
+         "    * "]
+
+Five  = ["*****",
+         "*    ",
+         "*    ",
+         " *** ",
+         "    *",
+         "*   *",
+         " *** "]
+
+Six   = [" *** ",
+         "*   *",
+         "*    ",
+         "**** ",
+         "*   *",
+         "*   *",
+         " *** "]
+
+Seven = ["*****",
+         "    *",
+         "   * ",
+         "  *  ",
+         " *   ",
+         "*    ",
+         "*    "]
+
+Eight = [" *** ",
+         "*   *",
+         "*   *",
+         " *** ",
+         "*   *",
+         "*   *",
+         " *** "]
+
+Nine  = [" ****",
+         "*   *",
+         "*   *",
+         " ****",
+         "    *",
+         "    *",
+         " *** "]
+ 
+Digits = [Zero, One, Two, Three, Four, Five, Six, Seven, Eight, Nine]
+
+for Number in Digits:
+    for item in Number:
+        for _ in item:
+            if _ != " ":
+                item = " " + Number
+
+try:
+    digits = sys.argv[1]
+    row = 0
+    while row < 7:
+        line = ""
+        column = 0
+        while column < len(digits):
+            number = int(digits[column])
+            digit = Digits[number]
+            line += digit[row].replace('*', digits[column]) + " "           #simply replacing the '*' sign
+            column += 1
+        print(line)
+        row += 1
+except IndexError:
+    print("enter numbers...(bigdigits.py <number>)")
+except ValueError:
+    print("only numbers allowed..(no strings f.e.)")
