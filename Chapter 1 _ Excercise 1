@@ -98,12 +98,10 @@ try:
         while column < len(digits):
             number = int(digits[column])
             digit = Digits[number]
-            for Number in Digits:                                     
-                for item in Number:                                  
-                    for e in item:
-                        if e != " ":
-                            e = " " + number
-            
+            for c in digit[row]:
+                if c == "*":
+                    c = str(number)
+                line += c
             line += digit[row] + " "
             column += 1
         print(line)
