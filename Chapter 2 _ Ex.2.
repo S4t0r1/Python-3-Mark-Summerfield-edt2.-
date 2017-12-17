@@ -1,0 +1,28 @@
+#average1_ans.py
+
+count = 0
+numsum = 0
+numbers = []
+
+while True:
+    try:
+       line = input("Write a number or Enter for exit: ")
+       if line:
+          numbers.append(int(line))
+          numsum += int(line)
+          count += 1
+       else:
+          avg = numsum / count
+          maximum = numbers[0]
+          minimum = numbers[-1]
+          for e in numbers:
+              if e > maximum:
+                  maximum = e
+              elif e < minimum:
+                  minimum = e
+          print(numbers)
+          print("count = " + str(count), "sum = " + str(numsum), "min = " + str(minimum), 
+                "max = " + str(maximum), "avg = " + str(avg))  
+          break
+    except ValueError:
+        print("You have to write an integer...")
