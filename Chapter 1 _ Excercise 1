@@ -89,12 +89,6 @@ Nine  = [" ****",
  
 Digits = [Zero, One, Two, Three, Four, Five, Six, Seven, Eight, Nine]
 
-for Number in Digits:                                     # Getting down to a sigle element which can either be ' ' or '*' and
-    for item in Number:                                   # changing it to the Number in Digits
-        for _ in item:
-            if _ != " ":
-                item = " " + Number
-
 try:
     digits = sys.argv[1]
     row = 0
@@ -104,6 +98,12 @@ try:
         while column < len(digits):
             number = int(digits[column])
             digit = Digits[number]
+            for Number in Digits:                                     
+                for item in Number:                                  
+                    for e in item:
+                        if e != " ":
+                            e = " " + number
+            
             line += digit[row] + " "
             column += 1
         print(line)
