@@ -1,0 +1,45 @@
+# average2_ans.py
+
+count = 0
+numsum = 0
+numbers = []
+numbers_sorted = []
+
+while True:
+    try:
+       line = input("Write a number or Enter for exit: ")
+       if line:
+          numbers.append(int(line))
+          numbers_unsorted = []
+          numbers_unsorted += numbers
+          numsum += int(line)
+          count += 1
+       else:
+          while numbers:
+              minimum = numbers[-1]
+              for e in numbers:
+                  if e < minimum:
+                      minimum = e
+              numbers_sorted.append(minimum)
+              numbers.remove(minimum)
+          
+          minimum = numbers_unsorted[-1]
+          maximum = numbers_unsorted[0]
+          for e in numbers_unsorted:
+              if e > maximum:
+                  maximum = e
+              elif e < minimum:
+                  minimum = e
+          
+          if count / 2 == count // 2:
+              median = (numbers_sorted[(count // 2) - 1] + numbers_sorted[count // 2]) / 2
+          else:
+              median = numbers_sorted[count // 2]
+          
+          print(numbers_unsorted)
+          print(numbers_sorted)
+          print("count =", count, "sum =", numsum, "min =", minimum , 
+                "max =", maximum , "avg =", numsum / count , "median =", median)  
+          break
+    except ValueError:
+        print("You have to write an integer...")
