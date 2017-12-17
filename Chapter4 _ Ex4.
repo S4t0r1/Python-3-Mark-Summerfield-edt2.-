@@ -1,0 +1,32 @@
+# awfulpoetry2_ans.py
+
+import random
+
+zamena = ["moj", "tvoj", "jej", "jeho"]
+pods_mena = ["ja", "somar", "oni", "vtak"]
+prislovia = ["nahlas", "pozoruhodne", "nahodne"]
+slovesa = ["krici", "tancujem", "spi", "rozmyslaju"]
+count = 0
+
+while True:
+    try:
+        user = input("Do you wish to set num of rows? (1-10): ")
+        if user:
+            rows = int(user)
+            if rows < 1 or rows > 10:
+                rows = 5
+        else:
+            rows = 5
+    
+        while count < rows:
+            line = []
+            zoznam = [zamena, pods_mena, prislovia, slovesa]
+            for item in zoznam:
+                line.append(random.choice(item))
+    
+            veta = " ".join(line)
+            print(veta)
+            count += 1
+        break
+    except ValueError:
+        print("Has to be integer")
