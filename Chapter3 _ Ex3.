@@ -1,0 +1,22 @@
+# awfulpoetry1_ans.py
+
+import random
+
+zamena = ["moj", "tvoj", "jej", "jeho"]
+pods_mena = ["ja", "somar", "oni", "vtak"]
+prislovia = ["nahlas", "pozoruhodne", "nahodne"]
+slovesa = ["krici", "tancujem", "spi", "rozmyslaju"]
+
+count = 0
+while count < 5:
+    line = []
+    zoznam = [zamena, pods_mena, prislovia, slovesa]
+    if random.randint(0, 1) == 0:
+        zoznam.remove(zoznam[random.randint(0, 3)])
+    
+    for item in zoznam:
+        line.append(random.choice(item))
+    
+    veta = " ".join(line)
+    print(veta)
+    count += 1
