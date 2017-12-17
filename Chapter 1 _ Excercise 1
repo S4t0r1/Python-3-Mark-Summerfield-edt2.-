@@ -201,12 +201,6 @@ Nine  = [" ****",
  
 Digits = [Zero, One, Two, Three, Four, Five, Six, Seven, Eight, Nine]
 
-for Number in Digits:
-    for item in Number:
-        for _ in item:
-            if _ != " ":
-                item = " " + Number
-
 try:
     digits = sys.argv[1]
     row = 0
