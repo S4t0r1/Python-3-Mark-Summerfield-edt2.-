@@ -1,0 +1,39 @@
+import sys, collections, string
+
+
+strip = string.whitespace + string.digits + string.punctuation + "\"'"
+words = collections.defaultdict(int)
+
+def extract(item):
+    return item[1]
+
+for filename in sys.argv[1:]:
+    with open(filename) as file:
+        for line in file:
+            for word in line.lower().split():
+                if len(word) > 2:
+                    word = word.strip(strip)
+                    words[word] += 1
+for word, count in sorted(words.items(), key=extract):
+    print("Word '{0}' was found {1} times...".format(word, count))
+
+===========================================================================
+
+import sys, collections, string
+
+
+strip = string.whitespace + string.digits + string.punctuation + "\"'"
+words = collections.defaultdict(int)
+
+def extract(item):
+    return item[1]
+
+with open("forenames.txt", encoding="utf8") as file:
+    for line in file:
+        for word in line.lower().split():
+            if len(word) > 2:
+                word = word.strip(strip)
+                words[word] += 1
+
+for word, count in sorted(words.items(), key=extract):
+    print("Word '{0}' was found {1} times...".format(word, count))
