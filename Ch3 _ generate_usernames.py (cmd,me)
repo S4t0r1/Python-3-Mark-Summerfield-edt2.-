@@ -22,18 +22,17 @@ ID, FORENAME, MIDDLENAME, SURNAME, DEPARTMENT = range(5)
 def main():
     if len(sys.argv) == 1 or sys.argv[1] in {"-h, --help"}:
         print("usage: {0} file1 [file2 [..fileN]]".format(sys.argv[0]))
-        sys.exit()
     
     usernames = set()
     users = {}
-    for filename in sys.argv[1:]:
-        for line in open(filename):
+    with open("users.txt", encoding="utf8") as file:
+        for line in file:
             line = line.rstrip()
             if line:
                   user = process_line(line, usernames)
                   users[user.surname.lower(), user.forename.lower(),
                         user.id] = user
-    print_users(user)
+    print_users(users)
 
 
 def process_line(line, usernames):
@@ -52,7 +51,7 @@ def generate_username(fields, usernames):
     while username in usernames:
         username = "{0}{1}".format(original_name, count)
         count += 1
-    usernames.append(username)
+    usernames.add(username)
     return username
 
 
@@ -71,7 +70,7 @@ def print_users(users):
         if user.middlename:
             initial = " " + user.middlename[0]
         name = "{0.surname}, {0.forename} {1}".format(user, initial)
-        print("{0:.<{nw}} ({1.id:4}) {1.Username:{uw}}".format(name,
+        print("{0:.<{nw}} ({1.id:4}) {1.username:{uw}}".format(name,
                               user, nw=namewidth, uw=usernamewidth))
 
 main()
