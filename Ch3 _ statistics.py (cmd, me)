@@ -1,3 +1,15 @@
+"""
+      ***PREVIEW***
+   
+   total       = 183
+   average     = 130.56
+   median      = 43.00
+   modus       = [5.00, 7.00, 50.00]
+   std. dev    = 235.01
+
+"""
+
+
 # opens files from cmd line
 
 import sys, collections, math
