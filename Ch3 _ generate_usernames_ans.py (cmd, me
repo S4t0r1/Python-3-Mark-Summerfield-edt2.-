@@ -1,3 +1,18 @@
+"""         
+            ***PREVIEW***
+   1601:Albert:Lukas:Montgomery:Legal
+   3702:Albert:Lukas:Montgomery:Sales
+   4730:Nadelle::Landale:Warehousing
+   
+   Name                           ID     Username
+   ---------------------------- ------ ----------
+   Milner, Kieara.............. (4454) kmilner
+   Montgomery, Albert L........ (1601) almontgo
+   Montgomery, Albert L........ (3702) almontgo1
+
+"""
+
+
 import collections
 import sys
 
