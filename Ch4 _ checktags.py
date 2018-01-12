@@ -44,7 +44,7 @@ def parse(filename, skip_on_first_error=False):
                             if entity.startswith("#"):
                                 if c not in  HEXDIGITS:
                                     raise InvalidNumericEntityError()
-                            elif not (entity and c not in string.ascii_letters):
+                            elif (entity and c not in string.ascii_letters):
                                 raise InvalidAlphabeticEntityError()
                             entity += c
                 except (InvalidEntityError, InvalidTagContentError) as err:
