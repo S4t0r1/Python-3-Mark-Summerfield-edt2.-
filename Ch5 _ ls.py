@@ -1,7 +1,6 @@
 import locale, os, argparse, datetime
 
-
-locale.setlocale(locale.LC_ALL, "")
+locale.setlocale(locale.LC_ALL,"")
 
 
 def main():
@@ -13,11 +12,10 @@ def main():
         for path in paths:
             if os.path.isfile(path):
                 filenames.append(path)
-                continue
-            for name in os.listdir(path):
-                if not opts.hidden and name.startswith("."):
+            for filename in os.listdir(path):
+                if not opts.hidden and filename.startswith("."):
                     continue
-                fullname = os.path.join(path, name)
+                fullname = os.path.join(path, filename)
                 if fullname.startswith("./"):
                     fullname = fullname[2:]
                 if os.path.isfile(fullname):
@@ -52,23 +50,23 @@ def process_args():
 Paths are optional. If none are given . is used."""
     
     parser = argparse.ArgumentParser(usage=usage)
-    parser.add_argument("-H", "--hidden", dest="hidden", 
+    parser.add_argument("-H", "--hidden", dest="hidden",
                         action="store_true",
-                        help=("show hidden files [default: off]"))
+                        help=("show hidden items [default: off]"))
     parser.add_argument("-m", "--modified", dest="modified",
                         action="store_true",
-                        help=("show modification time/date [default: off]"))
+                        help=("show modification date/time [default: off]"))
     orderlist = ["name", "n", "modified", "m", "size", "s"]
     parser.add_argument("-o", "--order", dest="order",
                         choices=orderlist,
                         help=("order by ({0}) [default: %default]".format(
-                        ",".join(["'" + x + "'" for x in orderlist]))))
+                              ",".join(["'" + x + "'" for x in orderlist]))))
     parser.add_argument("-r", "--recursive", dest="recursive",
                         action="store_true",
-                        help=("recursing into sub-directories [default: off]"))
-    parser.add_argument("-s", "-sizes", dest="sizes",
+                        help=("recursing to subdirectories [default: off]"))
+    parser.add_argument("-s", "--sizes", dest="sizes",
                         action="store_true",
-                        help=("show size [default: off]"))
+                        help=("show sizes [default: off]"))
     parser.set_defaults(order=orderlist[0])
     opts, args = parser.parse_args()
     if not args:
@@ -82,26 +80,28 @@ def process_lists(opts, filenames, dirnames):
         modified = ""
         if opts.modified:
             try:
-                modified = (datetime.datetime.fromtimestamp(
-                            os.path.getmtime(name))
-                            .isoformat(" ")[:19] + " ")
+                modified = (datetime.datetime.fromtimestamp(os.path.getmtime(name))
+                           .isoformat(" ")[:19] + " ")
             except EnvironmentError:
-                modified = "{0:>19} ".format("unknown")
+                print("{0:>19} ".format("unknown"))
         size = ""
         if opts.sizes:
             try:
                 size = "{0:>15n} ".format(os.path.getsize(name))
             except EnvironmentError:
-                size = "{0:>15} ".format("unknown")
+                print("{0:>15} ".format("unknown"))
         if os.path.islink(name):
             name += " -> " + os.path.realpath(name)
-        if opts.order in {"m", "modified"}:
+        if opts.order in {"modified", "m"}:
             orderkey = modified
-        elif opts.order in {"s", "size"}:
-            orderkey = size
+        elif opts.order in {"size", "s"}:
+            orderkey = modified
         else:
             orderkey = name
-        keys_lines.append((orderkey, "{modified}{size}{name}".format(**locals())))
+        keys_lines.append((orderkey, "{modified}{size}{name}".format(
+                                                        **locals())))
+    size = "" if not opts.sizes else " " * 15
+    modified = "" if not opts.modified else " " * 20
     for name in sorted(dirnames):
         keys_lines.append((name, modified + size + name + "/"))
     for key, line in sorted(keys_lines):
