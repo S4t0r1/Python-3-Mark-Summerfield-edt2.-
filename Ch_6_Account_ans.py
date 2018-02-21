@@ -95,7 +95,7 @@ class Account(Transaction):
         try:
             fh = open(self.number, "rb")
             data = pickle.load(fh)
-            assert self.number = data[0], "account number doesn't match"
+            assert self.number == data[0], "account number doesn't match"
             self.__name, self.__transactions = data[1:]
         except (EnvironmentError, pickle.UnpicklingError) as err:
             raise LoadError(str(err))
