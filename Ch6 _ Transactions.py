@@ -17,12 +17,12 @@ class Transaction(object):
     
     if USE_GETATTR:
         def __getattr__(self, name):
+            classname = self.__class__.__name__
             if name in frozenset({"amount", "date", "currency", 
                         "eur_conversion_rate", "description"}):
                 return self.__dict__["_{classname}__{name}".format(**locals())]
-            else:
-                raise AttributeError("'{classname}' object has no "
-                    "attribute '{name}'".format(**locals()))
+            raise AttributeError("'{classname}' object has no "
+                        "attribute '{name}'".format(**locals()))
     else:
         @property
         def amount(self):
